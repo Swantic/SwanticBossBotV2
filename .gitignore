@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/SwanticBossBotV2.sln
+/SwanticBossBotV2/Program.cs
