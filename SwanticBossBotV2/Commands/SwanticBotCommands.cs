@@ -69,26 +69,37 @@ namespace SwanticBossBotV2.Commands
         }
 
 
-        [Command("GenerateTimes"), Description("Generates list of times starting at Maplestory reset 0 Example: !GenerateTimes -1(Number of hours from reset) 1(Number of hours to generate) 5/1/2008(Date to Generate) Copy: !GenerateTimes -1 5 5/1/2008 ")]
-        public async Task GenerateTimes(CommandContext ctx, [Description("Character Name")] double startTime,
-            [Description("Party Name")] int timeSpan, [Description("Party Name")] string bossingDay)
+        [Command("GenerateTimes"), Description("Generates list of times starting at Maplestory reset 0 Example: !GenerateTimes -1(Number of hours from reset), 1(Number of hours to generate), 1 (1 hours interval add .5 to do every half hour), 5/1/2008(Date to Generate) Copy: !GenerateTimes -1 5 1 5/1/2008")]
+        public async Task GenerateTimes(CommandContext ctx, [Description("StartTime")] double startTime,
+            [Description("Number of repetitions")] int timeSpan, [Description("Interval")] double interval, [Description("BossDay")] string bossingDay)
         {
+            int spamproc = 0;
             DateTime DateofRun = DateTime.Parse(bossingDay);
             DateofRun = DateofRun.AddHours(startTime);
             DateofRun = DateTime.SpecifyKind(DateofRun, DateTimeKind.Utc);
             DateTimeOffset datetimeconversionstart = DateofRun;
             DateTime MapletimeStart = DateTime.UtcNow;
-            for (int i = 0; i < timeSpan; i++)
+            for (double i = 0; i < timeSpan; i+= interval)
             {
-                DateTimeOffset datetimeconversionend=datetimeconversionstart.AddHours(i);
-                await ctx.Channel.SendMessageAsync("<t:" + datetimeconversionend.ToUnixTimeSeconds().ToString()+":f>");
+                if (spamproc<7)
+                {
+                    DateTimeOffset datetimeconversionend = datetimeconversionstart.AddHours(i);
+                    await ctx.Channel.SendMessageAsync("<t:" + datetimeconversionend.ToUnixTimeSeconds().ToString() + ":f>");
+                    spamproc++;
+                }
+                else
+                {
+                    
+
+                }
+
             }
             
         }
         [Command("GenerateTimes"), Description("GeneratesExample of time for Times")]
         public async Task GenerateTimes(CommandContext ctx)
         {
-            await ctx.Channel.SendMessageAsync("Generates list of times starting at Maplestory reset 0 Example: !GenerateTimes -1(Number of hours from reset) 1(Number of hours to generate) 5/1/2008(Date to Generate) Copy: !GenerateTimes -1 5 5/1/2008");
+            await ctx.Channel.SendMessageAsync("Generates list of times starting at Maplestory reset 0 Example: !GenerateTimes -1(Number of hours from reset), 1(Number of hours to generate), 1 (1 hours interval add .5 to do every half hour), 5/1/2008(Date to Generate) Copy: !GenerateTimes -1 5 1 5/1/2008");
             
         }
     }
