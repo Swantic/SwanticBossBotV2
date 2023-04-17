@@ -78,7 +78,6 @@ namespace SwanticBossBotV2.Commands
             DateofRun = DateofRun.AddHours(startTime);
             DateofRun = DateTime.SpecifyKind(DateofRun, DateTimeKind.Utc);
             DateTimeOffset datetimeconversionstart = DateofRun;
-            DateTime MapletimeStart = DateTime.UtcNow;
             for (double i = 0; i < timeSpan; i+= interval)
             {
                 if (spamproc<20)
