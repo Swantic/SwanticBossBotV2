@@ -81,7 +81,7 @@ namespace SwanticBossBotV2.Commands
             DateTime MapletimeStart = DateTime.UtcNow;
             for (double i = 0; i < timeSpan; i+= interval)
             {
-                if (spamproc<7)
+                if (spamproc<20)
                 {
                     DateTimeOffset datetimeconversionend = datetimeconversionstart.AddHours(i);
                     await ctx.Channel.SendMessageAsync("<t:" + datetimeconversionend.ToUnixTimeSeconds().ToString() + ":f>");
@@ -89,8 +89,8 @@ namespace SwanticBossBotV2.Commands
                 }
                 else
                 {
-                    
-
+                    await ctx.Channel.SendMessageAsync("The bot is spamming the discord and will not complete the command.");
+                    return;
                 }
 
             }
